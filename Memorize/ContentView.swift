@@ -9,11 +9,22 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        HStack{
-            CardView(isFaceUp: true)
-            CardView()
-            CardView()
-            CardView()
+        VStack{
+            HStack{
+                CardView(isFaceUp: true)
+                CardView()
+                CardView()
+            }
+            HStack{
+                CardView()
+                CardView()
+                CardView()
+            }
+            HStack{
+                CardView()
+                CardView(isFaceUp: true)
+                CardView()
+            }
         }
         .foregroundColor(.green)
         .padding()
