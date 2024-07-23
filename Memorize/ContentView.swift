@@ -12,7 +12,10 @@ struct ContentView: View {
     @State var cardCount: Int = 3
     var body: some View {
         VStack{
-            cards
+            ScrollView{
+                cards
+            }
+            Spacer()
             cardCountAdjusters
         }
         .padding()
@@ -27,26 +30,29 @@ struct ContentView: View {
     }
     
     var cards: some View {
-        HStack{
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 110))]){
             ForEach(0..<cardCount, id:\.self) { index in
                 CardView(content: emojis[index])
+                    .aspectRatio(4/4, contentMode: .fit)
             }
         }.foregroundColor(.green)
     }
-    var cardRemover: some View {
+    
+    func cardCountAdjuster(by offset: Int, symbol: String) -> some View {
         Button(action: {
-            cardCount -= 1
+            cardCount += offset
         }, label: {
-            Image(systemName: "rectangle.stack.badge.minus")
+            Image(systemName: symbol)
         })
+        .disabled(cardCount+offset<1 || cardCount+offset>emojis.count)
+    }
+    
+    var cardRemover: some View {
+        cardCountAdjuster(by: -1, symbol: "rectangle.stack.badge.minus")
     }
     
     var cardAdder: some View {
-        Button(action: {
-            cardCount += 1
-        }, label: {
-            Image(systemName: "rectangle.stack.badge.plus")
-        })
+        cardCountAdjuster(by: 1, symbol: "rectangle.stack.badge.minus")
     }
 }
 
@@ -57,14 +63,13 @@ struct CardView: View {
     var body: some View {
         ZStack {
             let base = RoundedRectangle(cornerRadius: 15)
-            if isFaceUp{
+            Group {
                 base.foregroundColor(.white)
                 base.strokeBorder(lineWidth: 5)
-                Text(content)
-                    .font(.largeTitle)
-            } else {
-                RoundedRectangle(cornerRadius: 15)
+                Text(content).font(.largeTitle)
             }
+            .opacity(isFaceUp ? 1 : 0)
+            base.fill().opacity(isFaceUp ? 0 : 1)
         }
         .onTapGesture {
             isFaceUp.toggle()
