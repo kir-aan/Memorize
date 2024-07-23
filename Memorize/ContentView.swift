@@ -30,10 +30,10 @@ struct ContentView: View {
     }
     
     var cards: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 110))]){
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 130))]){
             ForEach(0..<cardCount, id:\.self) { index in
                 CardView(content: emojis[index])
-                    .aspectRatio(4/4, contentMode: .fit)
+                    .aspectRatio(2/3, contentMode: .fit)
             }
         }.foregroundColor(.green)
     }
