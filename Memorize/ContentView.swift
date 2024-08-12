@@ -22,7 +22,7 @@ struct ContentView: View {
             bottomActionBar
 
         }
-        .padding(10)
+        .padding()
     }
     
     
