@@ -51,7 +51,7 @@ struct ContentView: View {
     var cards: some View{
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]){
             ForEach(currentEmojis.indices, id:\.self){ index in
-                return cardView(selectedEmoji: currentEmojis[index])
+                 cardView(selectedEmoji: currentEmojis[index])
                     .aspectRatio(2/3,contentMode: .fit)
             }
         }
@@ -61,7 +61,7 @@ struct ContentView: View {
 }
 
 struct cardView: View {
-    @State var isFaceUp: Bool = true
+    @State var isFaceUp: Bool = false
     let selectedEmoji: String
     var body: some View {
         ZStack {
