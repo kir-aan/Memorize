@@ -33,7 +33,7 @@ struct ContentView: View {
                 Button(action: {
                     let selectedTheme = emojiThemes[key] ?? currentEmojis
                     if(cardCount > selectedTheme.count){
-                        cardCount = 3
+                        cardCount = selectedTheme.count
                     }
                     currentEmojis = selectedTheme.shuffled()
                 }, label: {
@@ -77,7 +77,7 @@ struct ContentView: View {
     }
     
     var cards: some View{
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 130))]){
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]){
             ForEach(0..<cardCount, id:\.self){ index in
                 cardView(selectedEmoji: currentEmojis[index])
                     .aspectRatio(2/3,contentMode: .fit)
