@@ -34,7 +34,7 @@ struct ContentView: View {
                     if(cardCount > selectedTheme.count){
                         cardCount = 3
                     }
-                    currentEmojis = selectedTheme
+                    currentEmojis = selectedTheme.shuffled()
                 }, label: {
                     Text(key)
                 })
