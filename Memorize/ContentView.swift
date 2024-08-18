@@ -37,13 +37,15 @@ struct ContentView: View {
                     }
                     currentEmojis = selectedTheme.shuffled()
                 }, label: {
+                    let symbol = symbolMap[key] ?? ""
                     VStack {
-                        let symbol = symbolMap[key] ?? ""
                         Image(systemName: symbol)
+                            .imageScale(.large)
+                        
                         Text(key)
+                            .font(.caption2)
                     }
                 })
-                //.buttonStyle(.borderedProminent)
             }
         }
     }
