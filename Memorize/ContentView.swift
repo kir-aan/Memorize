@@ -11,6 +11,7 @@ struct ContentView: View {
     let emojiThemes: [String: [String]] = ["Food":["🍕","🥩","🥨","🍗","🥩","🍗","🥨","🍕"],
                                            "Sport":["🏀","🏈","⛳️","🏓","🏏","🏈","🏓","🏀","🏏","⛳️"],
                                            "Animal":["🐶","🦁","🦋","🐶","🪱","🐒","🦆","🦁","🐒","🦋","🦆","🪱"]]
+    let symbolMap: [String:String] = ["Food":"fork.knife", "Sport":"sportscourt", "Animal":"pawprint"]
     @State var currentEmojis: [String] = ["🐸", "🎲", "⚽️","🔥", "🔥","⚽️", "🎲", "🐸"]
     @State var cardCount: Int = 3
     var body: some View {
@@ -36,9 +37,13 @@ struct ContentView: View {
                     }
                     currentEmojis = selectedTheme.shuffled()
                 }, label: {
-                    Text(key)
+                    VStack {
+                        var symbol = symbolMap[key] ?? ""
+                        Image(systemName: symbol)
+                        Text(key)
+                    }
                 })
-                .buttonStyle(.borderedProminent)
+                //.buttonStyle(.borderedProminent)
             }
         }
     }
