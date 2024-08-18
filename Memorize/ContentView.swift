@@ -38,7 +38,7 @@ struct ContentView: View {
                     currentEmojis = selectedTheme.shuffled()
                 }, label: {
                     VStack {
-                        var symbol = symbolMap[key] ?? ""
+                        let symbol = symbolMap[key] ?? ""
                         Image(systemName: symbol)
                         Text(key)
                     }
